@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>前端面试题(二) | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.如何把URL参数解析为一个对象 var url = &amp;quot;http://www.taobao.com/index.php?key0=0&amp;amp;key1=1&amp;amp;key2=2&amp;quot;;   function decode(url) {       var str = url.split(&amp;quot;?&amp;quot;)[1],     var item = str.split(&amp;qu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题(二)">
+<meta property="og:url" content="http://yoursite.com/2017/01/17/前端面试题-二/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.如何把URL参数解析为一个对象 var url = &amp;quot;http://www.taobao.com/index.php?key0=0&amp;amp;key1=1&amp;amp;key2=2&amp;quot;;   function decode(url) {       var str = url.split(&amp;quot;?&amp;quot;)[1],     var item = str.split(&amp;qu">
+<meta property="og:updated_time" content="2017-01-20T04:19:28.902Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试题(二)">
+<meta name="twitter:description" content="1.如何把URL参数解析为一个对象 var url = &amp;quot;http://www.taobao.com/index.php?key0=0&amp;amp;key1=1&amp;amp;key2=2&amp;quot;;   function decode(url) {       var str = url.split(&amp;quot;?&amp;quot;)[1],     var item = str.split(&amp;qu">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0">
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/image/avatar.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">keivin</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔/">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">keivin</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/image/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">keivin</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔/">随笔</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-前端面试题-二" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端面试题(二)
+    </h1>
+  
+
+        <a href="/2017/01/17/前端面试题-二/" class="archive-article-date">
+  	<time datetime="2017-01-17T12:29:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-17</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.如何把URL参数解析为一个对象</p>
+<pre><code>var url = &quot;http://www.taobao.com/index.php?key0=0&amp;key1=1&amp;key2=2&quot;;  
+function decode(url) {  
+    var str = url.split(&quot;?&quot;)[1],
+    var item = str.split(&quot;&amp;&quot;);  
+    var result = {};  
+    var arr;  
+    for (var i = 0; i &lt; item.length; i++) {  
+        arr = item[i].split(&quot;=&quot;);  
+        result[arr[0]] = arr[1];  
+    }  
+    return result;  
+}  
+decode(url)
+</code></pre><p>2.你有用过哪些前端性能优化的方法？</p>
+<pre><code>（1） 减少http请求次数：CSS Sprites, JS、CSS源码压缩、图片大小控制合适；网页Gzip，CDN托管，data缓存 ，图片服务器。
+
+（2） 前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+
+（3） 用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能。
+
+（4） 当需要设置的样式很多时设置className而不是直接操作style。
+
+（5） 少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。
+
+（6） 避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
+
+（7） 图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
+</code></pre><a id="more"></a>
+<pre><code>（8） 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢。
+对普通的网站有一个统一的思路，就是尽量向前端优化、减少数据库操作、减少磁盘IO。向前端优化指的是，在不影响功能和体验的情况下，能在浏览器执行的不要在服务端执行，能在缓存服务器上直接返回的不要到应用服务器，程序能直接取得的结果不要到外部取得，本机内能取得的数据不要到远程取，内存能取到的不要到磁盘取，缓存中有的不要去数据库查询。减少数据库操作指减少更新次数、缓存结果减少查询次数、将数据库执行的操作尽可能的让你的程序完成（例如join查询），减少磁盘IO指尽量不使用文件系统作为缓存、减少读写文件次数等。程序优化永远要优化慢的部分，换语言是无法“优化”的。
+</code></pre><p>3.用js实现千位分隔符?</p>
+<pre><code> function format(num){
+     num=num+&apos;&apos;;
+     var str=&apos;&apos;;
+     for(var i=num.length-1,j=1;i&gt;=0;i--,j++){
+         if(j%3==0&amp;&amp;i!=0){
+             str+=num[i]+&apos;,&apos;;
+             continue;
+         }
+         str+=num[i]
+     }
+     return str.split(&apos;&apos;).reverse().join(&apos;&apos;);
+ }
+alert(format(12345678912))
+</code></pre><p>4.移动端前端开发与PC端比有哪些不同？</p>
+<pre><code>1.pc端没有触摸的各种事件，移动端有；移动端没有鼠标移入移出事件，但是pc端有
+
+2.Pc端最常用的布局是固定宽度为980px（也有960px，1000px，1200px）；而在移动端，因为有很多网页是可以横屏看也可以竖屏看，并且很多屏幕的饿分辨率都是不一样的，所以只要牵涉到移动端都要考虑用响应式布局
+
+3.Pc布局考虑更多的是浏览器的兼容性，但是在移动端，考虑更多的是手机兼容性，因为手机的型号类型非常的多，导致屏幕的分辨率是不一样的
+
+4.移动端触摸弹出的手机键盘处理也是在pc端不会遇到的问题。
+
+5.移动端和pc端适用的js框架也是不一样
+
+6.Pc端浏览器内核有很多，webkit，Gecko，。。。。，但是移动端的浏览器内核比较单一，基本都是webkit以及webkit相关的blink
+
+7.Pc端的交互是鼠标，键盘的交互而移动端变成了触摸，手势的交互
+</code></pre><p>5.我们给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡，会执行几次事件，会先执行冒泡还是捕获？</p>
+<pre><code>绑定在被点击元素的事件是按照代码的顺序发生的，其他非绑定的元素则是通过冒泡或者捕获的触发。按照W3C的标准，先发生捕获事件，后发生冒泡事件。所以事件的整体顺序是：非目标元素捕获 -&gt; 目标元素代码顺序 -&gt; 非目标元素冒泡。
+</code></pre><p>6.移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？</p>
+<pre><code>大概有300ms的延时
+
+来源是因为safari浏览器的双击缩放事件。由于用户可以进行双击缩放或者双击滚动的操作，当用户一次点击屏幕之后，浏览器并不能立刻判断用户是确实要打开这个链接，还是想要进行双击操作。因此，iOS Safari 就等待 300 毫秒，以判断用户是否再次点击了屏幕。其他浏览器都复制了safari的这种约定。
+
+1.用zeptoJs中的tap事件来代替click
+
+2.FastClick
+
+    它的核心思想是取消默认的click时间，判断当前dom节点的类型进行相应的操作
+
+    FastClick 的使用方法非常简单，在 window load 事件之后，在body上调用FastClick.attach()即可。
+
+    window.addEventListener( &quot;load&quot;, function() {
+        FastClick.attach( document.body );
+    }, false );
+</code></pre><p>7.写一个函数，[1,2,3,4,5]=&gt;[1,2,3,4,5,1,2,3,4,5]</p>
+<pre><code>function clone() { 
+    var arr=[1,2,3,4,5];
+    var len=arr.length;
+    for(var i=0;i&lt;len;i++){
+       var b= arr[i];
+       arr.push(b);
+
+    }
+    return arr;
+ }
+alert(clone());
+</code></pre><p>8.JavaScript原型，原型链 ? 有什么特点？</p>
+<pre><code>每个函数（构造函数）都有一个prototype（原型）属性，这个属性是一个指针，指向一个对象（原型对象），而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。
+
+访问一个对象的属性时，先在基本属性中查找，如果没有，继续向上找，找到object原型，这就是原型链
+
+使用原型对象的好处是可以让所有的对象实例共享它所包含的属性和方法。
+
+JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。
+
+ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。
+
+只要是原型链中出现过的原型，都可以说是该原型链所派生的实例的原型。
+
+不能用字面量创建原型的方法，这样做会重写原型链。
+
+不要在原型对象中定义属性的，否则会被所有实例共享。
+</code></pre><p>9.什么是“前端路由”?什么时候适合使用“前端路由”? “前端路由”有哪些优点和缺点?</p>
+<pre><code>1，什么是前端路由？
+
+    路由是根据不同的 url 地址展示不同的内容或页面
+    前端路由就是把不同路由对应不同的内容或页面的任务交给前端来做，之前是通过服务端根据 url 的不同返回不同的页面实现的。
+
+2，什么时候使用前端路由？
+
+    在单页面应用，大部分页面结构不变，只改变部分内容的使用
+
+3，前端路由有什么优点和缺点？
+
+    优点
+    用户体验好，不需要每次都从服务器全部获取，快速展现给用户
+    缺点
+    使用浏览器的前进，后退键的时候会重新发送请求，没有合理地利用缓存
+    单页面无法记住之前滚动的位置，无法在前进，后退的时候记住滚动的位置
+</code></pre><p>10.Javascript如何实现继承？</p>
+<pre><code>1.原型链继承  核心： 将父类的实例作为子类的原型
+
+    function animal(){  
+    this.name=function(){
+        console.log(&apos;我有名字&apos;);
+        }
+    }
+    function cat() { 
+        this.climb=function(){
+            console.log(&apos;我会爬树&apos;)
+        }
+     }
+    function tiger(){
+        this.type=function(){
+             console.log(&apos;我是老虎&apos;)
+        }
+    }
+    cat.prototype=new animal();
+    tiger.prototype=new cat();
+    var  _child=new tiger();
+    console.log(_child.name());
+    console.log(_child.climb())；
+
+2.构造继承
+
+    function Person(name,age){
+       this.name=name;
+       this.age=age;
+    }
+    function Child(name,age,job){
+        Person.call(this,name,age);
+        this.job=job;
+   }
+    var _child=new Child(&apos;lucy&apos;,&apos;16&apos;,&apos;星灵魔法师&apos;);
+    alert(_child.name)
+    alert(_child.age)
+
+3.混合继承
+
+    function Person(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    Person.prototype.sayhellow=function(){
+        alert(&apos;hello,我叫&apos;+this.name+&apos;今年&apos;+this.age)
+    }
+    function Student(name,age,job){
+        Person.apply(this,[name,age]);
+        //Person.apply(this,arguments);
+        // Person.apply(this,name,age)
+        this.job=job;
+    };
+    Student.prototype.sayhellow=function(){
+        alert(&apos;hello,我叫&apos;+this.name+&apos;\n&apos;+&apos;今年&apos;+this.age+&apos;\n&apos;+&apos;我是一名&apos;+this.job)
+    };
+    var student=new Student(&apos;lucy&apos;,&apos;16&apos;,&apos;星灵魔法师&apos;)
+    student.sayhellow();
+</code></pre><p>11.Javascript创建对象的几种方式？</p>
+<pre><code>1.简单对象的创建    使用对象字面的方式{} 
+     var Cat  = {};
+     Cat.name=&quot;kity&quot;;//添加属性并赋值
+     Cat.age=2;
+     Cat.sayHello=function(){
+      alert(&quot;hello &quot;+Cat.name+&quot;,今年&quot;+Cat[&quot;age&quot;]+&quot;岁了&quot;);//可以使用“.”的方式访问属性，也可以使用HashMap的方式访问
+     }
+     Cat.sayHello();//调用对象的（方法）函数
+
+2.用function(函数)来模拟构造函数
+
+    function Person(name,age){  
+        this.name=name;
+        this.age=age;
+        this.job=function(){
+             alert(&quot;我叫&quot;+this.name+&quot;,今年&quot;+this.age+&quot;,我的职业是教师&quot;);
+        }
+    }
+    var person=new Person(&apos;jack&apos;,&apos;26&apos;);
+    person.job()
+
+3.使用工厂方式来创建（Object关键字）
+
+  function Person(name,age){
+        var obj=new Object();
+        obj.name=name;
+        obj.age=age;
+        obj.showName=function(){
+            return this.name
+        };
+        obj.showAge=function(){
+            return this.age
+        };
+        return obj;
+    }
+    var _child=new Person(&apos;张三&apos;,&apos;25&apos;);
+    alert(_child.showName());
+    alert(_child.showAge());
+
+4.使用原型对象的方式  prototype关键字
+
+    function Dog() {};
+    Dog.prototype.name=&quot;旺财&quot;;
+    Dog.prototype.eat=function(){
+        alert(this.name+&quot;是个吃货&quot;)
+    }
+    var dog=new Dog();
+    dog.eat();
+
+5.混合模式(原型和构造函数)
+
+    function Person(name,age) { 
+        this.name=name;
+        this.age=age;
+    }
+    Person.prototype.showJob=function(){
+        alert(&quot;我的名字是&quot;+this.name+&quot;,今年&quot;+this.age+&quot;岁,我的职业是灭龙魔法师 &quot;)
+    }
+    var person=new Person(&quot;natsu&quot;,&quot;16&quot;);
+    person.showJob();
+</code></pre><p>12.写一个快速排序的算法</p>
+<pre><code>function sort(arr){
+   if (arr.length &lt;= 1){return arr};
+    var left=[];
+    var right=[];
+    var midIndex=Math.floor(arr.length / 2);
+    var mid=arr.splice(midIndex,1);
+    var len=arr.length;
+    for(var i=0;i&lt;len;i++){
+        if(arr[i]&gt;mid){
+            right.push(arr[i])
+        }else{
+            left.push(arr[i]);
+        }
+    }
+    return sort(left).concat(mid,sort(right));
+}
+var arr=[55,5,26,12,-20,34,88,49,66,78];
+alert(sort(arr));
+</code></pre><p>13.Javascript作用链域?</p>
+<pre><code>全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。
+当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，
+直至全局函数，这种组织形式就是作用域链。
+</code></pre><p>14.谈谈This对象的理解。</p>
+<pre><code>this总是指向函数的直接调用者（而非间接调用者）；
+如果有new关键字，this指向new出来的那个对象；
+在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；
+</code></pre><p>15.new操作符具体干了什么呢?</p>
+<pre><code>1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
+2、属性和方法被加入到 this 引用的对象中。
+3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。
+</code></pre><p>16.Javascript中，有一个函数，执行时对象查找时，永远不会去查找原型，这个函数是？</p>
+<pre><code>hasOwnProperty
+
+javaScript中hasOwnProperty函数方法是返回一个布尔值，指出一个对象是否具有指定名称的属性。此方法无法检查该对象的原型链中是否具有该属性；该属性必须是对象本身的一个成员。
+使用方法：
+object.hasOwnProperty(proName)
+其中参数object是必选项。一个对象的实例。
+proName是必选项。一个属性名称的字符串值。
+
+如果 object 具有指定名称的属性，那么JavaScript中hasOwnProperty函数方法返回 true，反之则返回 false。
+</code></pre><p>17.AMD（Modules/Asynchronous-Definition）、CMD（Common Module Definition）规范区别？</p>
+<pre><code>AMD 异步模块定义，所有的模块将被异步加载，模块加载不影响后面语句运行。所有依赖某些模块的语句均放置在回调函数中。
+
+CMD 通用模块定义。执行顺序和书写顺序是完全一致，加载完某个依赖模块后并不执行，只是下载而已，在所有依赖模块加载完成后进入主逻辑，遇到require语句的时候才执行对应的模块。
+
+区别：
+
+1. 对于依赖的模块，AMD 是提前执行，CMD 是延迟执行。不过 RequireJS 从 2.0 开始，也改成可以延迟执行（根据写法不同，处理方式不同）。
+2. CMD 推崇依赖就近，只有在用到某个模块的时候再去require。AMD 推崇依赖前置。在定义模块的时候就要声明其依赖的模块。
+</code></pre><p>18.requireJS的核心原理是什么</p>
+<pre><code>1、载入模块
+2、通过模块名解析出模块信息，以及计算出URL
+3、通过创建SCRIPT的形式把模块加载到页面中。
+4、判断被加载的脚本，如果发现它有依赖就去加载依赖模块。如果不依赖其它模块，就直接执行factory方法
+5、等所有脚本都被加载完毕就执行加载完成之后的回调函数
+</code></pre><p>19.GET和POST的区别，何时使用POST？</p>
+<pre><code>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，一般在2000个字符
+POST：一般用于修改服务器上的资源，对所发送的信息没有限制。
+
+GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值，
+也就是说Get是通过地址栏来传值，而Post是通过提交表单来传值。
+
+然而，在以下情况中，请使用 POST 请求：
+无法使用缓存文件（更新服务器上的文件或数据库）
+向服务器发送大量数据（POST 没有数据量限制）
+发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+</code></pre><p>20.AJAX的优缺点</p>
+<pre><code>Ajax的最大的特点是什么。
+
+  Ajax可以实现动态不刷新（局部刷新）
+
+ajax的缺点
+
+  1、ajax不支持浏览器back按钮。
+
+  2、安全问题 AJAX暴露了与服务器交互的细节。
+
+  3、对搜索引擎的支持比较弱。
+
+  4、破坏了程序的异常机制。
+
+  5、不容易调试。
+</code></pre><p>21.网站重构的理解？</p>
+<pre><code>网站重构：在不改变外部行为的前提下，简化结构、添加可读性，而在网站前端保持一致的行为。也就是说是在不改变UI的情况下，对网站进行优化，在扩展的同时保持一致的UI。
+
+对于传统的网站来说重构通常是：
+
+表格(table)布局改为DIV+CSS
+使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的)
+对于移动平台的优化
+针对于SEO进行优化
+深层次的网站重构应该考虑的方面
+
+减少代码间的耦合
+让代码保持弹性
+严格按规范编写代码
+设计可扩展的API
+代替旧有的框架、语言(如VB)
+增强用户体验
+通常来说对于速度的优化也包含在重构中
+
+压缩JS、CSS、image等前端资源(通常是由服务器来解决)
+程序的性能优化(如数据读写)
+采用CDN来加速资源加载
+对于JS DOM的优化
+HTTP服务器的文件缓存
+</code></pre><p>22.Web Worker 和webSocket</p>
+<pre><code>worker主线程:
+
+1.通过 worker = new Worker( url ) 加载一个JS文件来创建一个worker，同时返回一个worker实例。
+
+2.通过worker.postMessage( data ) 方法来向worker发送数据。
+
+3.绑定worker.onmessage方法来接收worker发送过来的数据。
+
+4.可以使用 worker.terminate() 来终止一个worker的执行。
+
+WebSocket是Web应用程序的传输协议，它提供了双向的，按序到达的数据流。他是一个HTML5协议，WebSocket的连接是持久的，他通过在客户端和服务器之间保持双工连接，服务器的更新可以被及时推送给客户端，而不需要客户端以一定时间间隔去轮询
+</code></pre><p>23.HTTP和HTTPS,为什么HTTPS安全</p>
+<pre><code>HTTP协议通常承载于TCP协议之上，在HTTP和TCP之间添加一个安全协议层（SSL或TSL），这个时候，就成了我们常说的HTTPS。
+
+默认HTTP的端口号为80，HTTPS的端口号为443。
+
+因为网络请求需要中间有很多的服务器路由器的转发。中间的节点都可能篡改信息，而如果使用HTTPS，密钥在你和终点站才有。https之所以比http安全，是因为他利用ssl/tls协议传输。它包含证书，卸载，流量转发，负载均衡，页面适配，浏览器适配，refer传递等。保障了传输过程的安全性
+</code></pre><p>​</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/01/17/前端面试题-二/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/05/22/数组排序算法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          数组排序算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/11/前端面试题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端面试题（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 keivin
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">rem</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

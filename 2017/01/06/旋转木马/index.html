@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | Hexo</title>
+  <title>类似旋转木马效果 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="前言用纯原生javascript写的类似旋转木马的图片3D效果。实现图片由远及近，由大变小。 思路1.布局 首先，定义一个容器，设定宽，高，超出部分隐藏。准备7张图片，放在容器中。因为要让图片看起来有3D效果，所以，图片的大小应该不一样，看起来远的图片，图片要小一些，模糊度也低一些。中间图片的层次设为最高，两边对称的减小。如图： css代码如下 *{         margin: 0;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/hello-world/index.html">
+<meta property="og:title" content="类似旋转木马效果">
+<meta property="og:url" content="http://yoursite.com/2017/01/06/旋转木马/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2018-03-22T09:35:32.370Z">
+<meta property="og:description" content="前言用纯原生javascript写的类似旋转木马的图片3D效果。实现图片由远及近，由大变小。 思路1.布局 首先，定义一个容器，设定宽，高，超出部分隐藏。准备7张图片，放在容器中。因为要让图片看起来有3D效果，所以，图片的大小应该不一样，看起来远的图片，图片要小一些，模糊度也低一些。中间图片的层次设为最高，两边对称的减小。如图： css代码如下 *{         margin: 0;">
+<meta property="og:image" content="https://raw.githubusercontent.com/liunianyimeng/exercise/master/src/review.png">
+<meta property="og:updated_time" content="2017-01-06T08:00:07.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="类似旋转木马效果">
+<meta name="twitter:description" content="前言用纯原生javascript写的类似旋转木马的图片3D效果。实现图片由远及近，由大变小。 思路1.布局 首先，定义一个容器，设定宽，高，超出部分隐藏。准备7张图片，放在容器中。因为要让图片看起来有3D效果，所以，图片的大小应该不一样，看起来远的图片，图片要小一些，模糊度也低一些。中间图片的层次设为最高，两边对称的减小。如图： css代码如下 *{         margin: 0;">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/liunianyimeng/exercise/master/src/review.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -141,33 +143,159 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="w-旋转木马" class="article article-type-w " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      类似旋转木马效果
     </h1>
   
 
-        <a href="/2018/03/22/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-22T10:51:24.315Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-22</time>
+        <a href="/2017/01/06/旋转木马/" class="archive-article-date">
+  	<time datetime="2017-01-06T06:17:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-06</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>用纯原生javascript写的类似旋转木马的图片3D效果。实现图片由远及近，由大变小。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>1.布局</p>
+<p>首先，定义一个容器，设定宽，高，超出部分隐藏。准备7张图片，放在容器中。因为要让图片看起来有3D效果，所以，图片的大小应该不一样，看起来远的图片，图片要小一些，模糊度也低一些。中间图片的层次设为最高，两边对称的减小。如图：<br><img src="https://raw.githubusercontent.com/liunianyimeng/exercise/master/src/review.png" alt="image"></p>
+<p>css代码如下</p>
+<pre><code>*{
+        margin: 0;
+        padding:0;
+        list-style: none;
+    }
+    .cantainer{
+        width:1000px;
+        height: 400px;
+        margin:50px auto;
+        overflow: hidden;
+        position: relative;
+    }
+    ul{
+        height: 400px;
+        position: absolute;
+    }
+</code></pre><a id="more"></a>
+<pre><code> ul li{
+     position: absolute;
+ }
+ ul li img{
+     width:100%;
+     height: 100%;
+ }
+ul li:nth-child(1){
+    width:96px; height: 63px;left:2px; top:-80px; z-index: 1;opacity: 0.25； filter: alpha(opacity=25)
+}
+ ul li:nth-child(2){
+    width:288px; height:180px;left:88px;top:110px;z-index: 2; opacity: 0.5; filter: alpha(opacity=50);
+}
+ul li:nth-child(3){
+     width: 384px; height: 240px; left: 174px; top: 80px;  z-index: 3;opacity: 0.75; filter: alpha(opacity=75)
+}
+ ul li:nth-child(4){
+    width: 480px; height: 300px; left: 260px;  top: 50px; z-index: 4;opacity: 1;filter:alpha(opacity=100)
+}
+ ul li:nth-child(5){
+    width: 384px; height: 240px; left: 442px;  top: 80px; z-index: 3;opacity: 0.75; filter: alpha(opacity=75)
+}
+ ul li:nth-child(6){
+    width: 288px; height: 180px; left: 624px;  top: 110px; z-index: 2; opacity: 0.5; 
+    filter: alpha(opacity=50);
+}
+ ul li:nth-child(7){
+     width: 96px; height: 63px; left: 902px;  top: -80px; z-index: 1; opacity: 0.25; 
+    filter: alpha(opacity=25)
+}
+a{
+    display: none;
+}
+#left{
+    width: 86px; 
+    height: 86px;
+    background: url(img/arrow1.png) no-repeat 0 0 ;
+    position: absolute;
+    left:218px;
+    top:150px;
+    z-index: 10;
+}
+#right{
+    width: 86px; 
+    height: 86px;
+    background: url(img/arrow2.png) no-repeat 0 0 ;
+    position: absolute;
+    top:150px;
+    right:218px;
+    z-index: 10;
+}
+</code></pre><p>2 js</p>
+<p>鼠标移入移出，左右按钮出现隐藏太简单，就不再赘述。关键在于，鼠标点击左右按钮后，图片的运动让它看起来有3D效果。</p>
+<pre><code>2.1 首先，将各个图片的位置信息，保存在一个数组中
+    for(var i=0;i&lt;aLi.length;i++){
+            arr.push({
+                left:aLi[i].offsetLeft,
+                top:aLi[i].offsetTop,
+                width:aLi[i].offsetWidth,
+                height:aLi[i].offsetHeight,
+                opacity:getStyle(aLi[i],&apos;opacity&apos;),
+                zIndex:getStyle(aLi[i],&apos;z-index&apos;)
+            })
+        }
+</code></pre><p>   2.2 对左右两个按钮添加点击事件<br>    点击右边按钮的时候，将数组中第一个元素取出，插入到数组的后面。<strong>arr.push(arr.shift())</strong>; 当前元素位置减1。每次点击一下，都把当前第一个元素取出，插入末尾，这样就可以形成一个循环。点击左边按钮的时候，正好相反，点击一次，把最后一个元素取出，插入到数组的头部。<strong>arr.unshift(arr.pop())</strong>。</p>
+<p>封装了一个运动框架，点击时，图片由当前位置，运动到下一个位置，可以调用这个框架，实现运动效果。</p>
+<pre><code>function getStyle(obj,sName){
+    return obj.currentStyle?obj.currentStyle[sName]:getComputedStyle(obj,false)[sName];
+
+}
+function startMove(obj,json,options){
+    options=options||{};
+    options.duration=options.duration||700;
+    options.easing=options.easing||&apos;ease-out&apos;;
+
+    var start={};//开始
+    var dis={};//位移
+    for(var name in json){
+        start[name]=parseFloat(getStyle(obj,name)); //获取图片当前的信息 
+        dis[name]=json[name]-start[name];//当前位置减去开始位置等于运动的距离
+    }
+    var count=Math.floor(options.duration/30);
+    var n=0;
+    clearInterval(obj.timer);
+    obj.timer=setInterval(function (){
+        n++;
+        for(var name in json){
+            switch(options.easing){
+                case &apos;linear&apos;:
+                    var cur=start[name]+dis[name]*n/count;
+                    break;
+                case &apos;ease-in&apos;:
+                    var cur=start[name]+dis[name]*Math.pow(n/count,3);
+                    break;
+                case &apos;ease-out&apos;:
+                    var cur=start[name]+dis[name]*(1-Math.pow(1-n/count,3));
+                    break;
+            }
+            if(name==&apos;opacity&apos;){
+                obj.style.opacity=cur;
+                obj.style.filter=&apos;alpha(opacity:&apos;+cur*100+&apos;)&apos;;
+            }else if(name==&apos;zIndex&apos;){
+                obj.style.zIndex=cur;
+            }else{
+                obj.style[name]=cur+&apos;px&apos;;
+            }
+        }
+        if(n==count){
+            clearInterval(obj.timer);
+            options.complete&amp;&amp;options.complete();
+        }
+    },30);
+}
+</code></pre><p>完整的代码，<a href="https://github.com/liunianyimeng/exercise" target="_blank" rel="noopener">点击这里查看这篇文章</a></p>
 
       
 
@@ -247,7 +375,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/22/hello-world/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/01/06/旋转木马/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -261,9 +389,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2017/01/06/解决js闭包for循环中i的问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          解决js闭包for循环中i的问题
+        
+      </div>
+    </a>
   
-    <a href="/2017/05/22/数组排序算法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数组排序算法</div>
+  
+    <a href="/2016/12/26/移动端rem布局/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">移动端rem布局</div>
       <i class="icon-circle-right"></i>
     </a>
   

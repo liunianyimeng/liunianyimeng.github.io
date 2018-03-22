@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | Hexo</title>
+  <title>解决js闭包for循环中i的问题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="闭包 闭包是前端面试经常问到的问题。所谓闭包，就是能够读取其他函数内部变量的函数。闭包有三个特性： 1.函数嵌套函数 2.函数内部可以引用外部的参数和变量 3.参数和变量不会被垃圾回收机制回收 要理解闭包，首先必须理解Javascript特殊的变量作用域。 变量的作用域无非就是两种：全局变量和局部变量。 函数内部可以直接读取全局变量 举例： for(var  i=0;i&amp;lt;10;i++){">
+<meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/hello-world/index.html">
+<meta property="og:title" content="解决js闭包for循环中i的问题">
+<meta property="og:url" content="http://yoursite.com/2017/01/06/解决js闭包for循环中i的问题/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2018-03-22T09:35:32.370Z">
+<meta property="og:description" content="闭包 闭包是前端面试经常问到的问题。所谓闭包，就是能够读取其他函数内部变量的函数。闭包有三个特性： 1.函数嵌套函数 2.函数内部可以引用外部的参数和变量 3.参数和变量不会被垃圾回收机制回收 要理解闭包，首先必须理解Javascript特殊的变量作用域。 变量的作用域无非就是两种：全局变量和局部变量。 函数内部可以直接读取全局变量 举例： for(var  i=0;i&amp;lt;10;i++){">
+<meta property="og:updated_time" content="2017-01-06T10:58:38.658Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="解决js闭包for循环中i的问题">
+<meta name="twitter:description" content="闭包 闭包是前端面试经常问到的问题。所谓闭包，就是能够读取其他函数内部变量的函数。闭包有三个特性： 1.函数嵌套函数 2.函数内部可以引用外部的参数和变量 3.参数和变量不会被垃圾回收机制回收 要理解闭包，首先必须理解Javascript特殊的变量作用域。 变量的作用域无非就是两种：全局变量和局部变量。 函数内部可以直接读取全局变量 举例： for(var  i=0;i&amp;lt;10;i++){">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -141,33 +142,65 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="w-解决js闭包for循环中i的问题" class="article article-type-w " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      解决js闭包for循环中i的问题
     </h1>
   
 
-        <a href="/2018/03/22/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-22T10:51:24.315Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-22</time>
+        <a href="/2017/01/06/解决js闭包for循环中i的问题/" class="archive-article-date">
+  	<time datetime="2017-01-06T08:29:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-06</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p><strong>闭包</strong></p>
+<p>闭包是前端面试经常问到的问题。所谓闭包，就是能够读取其他函数内部变量的函数。闭包有三个特性：</p>
+<pre><code>1.函数嵌套函数
+2.函数内部可以引用外部的参数和变量
+3.参数和变量不会被垃圾回收机制回收
+</code></pre><p>要理解闭包，首先必须理解Javascript特殊的变量作用域。</p>
+<p>变量的作用域无非就是两种：全局变量和局部变量。</p>
+<p>函数内部可以直接读取全局变量</p>
+<p>举例：</p>
+<pre><code>for(var  i=0;i&lt;10;i++){
+    setTimeout(function() {
+        console.log(i)
+    }, 1000);
+}
+</code></pre><p>这个结果会打印10个10，而不是想象的0,1,2,3……</p>
+<p>JS是单线程的,意味着同一时间只能执行一条语句,所以每个JS执行代码块都会阻塞异步事件的执行,这就意味着当一个异步(鼠标点击事件,ajax,settimeout)发生的时候,他们将排在执行队列的最后等待执行.<br><a id="more"></a><br>setTimeout是异步的，里面的匿名函数作为setTimeout的第一个参数，作为回调函数等会执行。所以上面代码执行的时候，setTimeout被添加到队列的后面等待执行。for循环中的变量 i 一直在变, 最终会变成10, 而循环每次执行setTimeout时, 其中的方法还没有真正运行, 等真正到时间执行时, i 的值已经变成 10 了!</p>
+<pre><code>即i=0,执行setTimeout(function () {console.log(i);}), 
+i=1,执行setTimeout(function () {console.log(i);}),
+i=2,执行setTimeout(function () {console.log(i);}),
+.......
+1s后到外部作用域寻找i,此时i早已经等于10，所以输出10个10.
+</code></pre><p>for循环中i变化的整个过程是瞬间完成的, 总之比异步要快, 就算你setTimout是0毫秒也一样, 会先执行完成.</p>
+<p>在这个代码中，setTimeout中的匿名函数没有将i作为参数传入来固定这个变量是值，让其保留下来, 而是直接引用了外部作用域中的 i, 因此 i 变化时, 也影响到了匿名function.用闭包修改后：</p>
+<pre><code> for (var i = 0; i &lt; 10; i++) {
+    (function(a) {
+        // 变量 i 的值在传递到这个作用域时被复制给了 a,
+        // 因此这个值就不会随外部变量而变化了
+        setTimeout(function() {
+            console.log(a);
+        }, 1000);
+    })(i); // 我们在这里把i传给a,
+}
+</code></pre><p>ES6提供了一个let来解决这个问题。</p>
+<p>let使用的是词法作用域或块作用域。 不同于使用 var声明的变量那样可以在包含它们的函数外访问，块作用域变量在包含它们的块或for循环之外是不能访问的。</p>
+<p>当let声明出现在循环体里时拥有和var完全不同的行为。 不仅是在循环里引入了一个新的变量环境，而是针对 每次迭代都会创建这样一个新作用域，所以上面例子中，只用let声明就可以了</p>
+<pre><code>for(let  i=0;i&lt;10;i++){
+    setTimeout(function() {
+        console.log(i)
+    }, 1000);
+}
+</code></pre><p>会输出和预料一样的结果，0,1,2,3……10</p>
 
       
 
@@ -197,6 +230,11 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
       
 
       
@@ -247,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/22/hello-world/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/01/06/解决js闭包for循环中i的问题/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -261,9 +299,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2017/01/11/前端面试题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          前端面试题（一）
+        
+      </div>
+    </a>
   
-    <a href="/2017/05/22/数组排序算法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数组排序算法</div>
+  
+    <a href="/2017/01/06/旋转木马/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">类似旋转木马效果</div>
       <i class="icon-circle-right"></i>
     </a>
   
