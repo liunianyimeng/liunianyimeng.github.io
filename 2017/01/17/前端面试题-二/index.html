@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.6" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.6">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.6">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.6" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.6',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.如何把URL参数解析为一个对象 var url = &amp;quot;http://www.taobao.com/index.php?key0=0&amp;amp;key1=1&amp;amp;key2=2&amp;quot;;   function decode(url) {       var str = url.split(&amp;quot;?&amp;quot;)[1],     var item = str.split(&amp;qu">
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题(二)">
+<meta property="og:url" content="http://yoursite.com/2017/01/17/前端面试题-二/index.html">
+<meta property="og:site_name" content="keivin的博客">
+<meta property="og:description" content="1.如何把URL参数解析为一个对象 var url = &amp;quot;http://www.taobao.com/index.php?key0=0&amp;amp;key1=1&amp;amp;key2=2&amp;quot;;   function decode(url) {       var str = url.split(&amp;quot;?&amp;quot;)[1],     var item = str.split(&amp;qu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-01-20T04:19:28.902Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试题(二)">
+<meta name="twitter:description" content="1.如何把URL参数解析为一个对象 var url = &amp;quot;http://www.taobao.com/index.php?key0=0&amp;amp;key1=1&amp;amp;key2=2&amp;quot;;   function decode(url) {       var str = url.split(&amp;quot;?&amp;quot;)[1],     var item = str.split(&amp;qu">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="keivin的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/17/前端面试题-二/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>前端面试题(二) | keivin的博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+  
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">keivin的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">心有猛虎，细嗅蔷薇。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />日程表</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-commonweal">
+    <a href="/404/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />公益 404</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/17/前端面试题-二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="keivin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="keivin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端面试题(二)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-17T20:29:26+08:00">2017-01-17</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+ 
+      
+        <p>1.如何把URL参数解析为一个对象</p>
+<pre><code>var url = &quot;http://www.taobao.com/index.php?key0=0&amp;key1=1&amp;key2=2&quot;;  
+function decode(url) {  
+    var str = url.split(&quot;?&quot;)[1],
+    var item = str.split(&quot;&amp;&quot;);  
+    var result = {};  
+    var arr;  
+    for (var i = 0; i &lt; item.length; i++) {  
+        arr = item[i].split(&quot;=&quot;);  
+        result[arr[0]] = arr[1];  
+    }  
+    return result;  
+}  
+decode(url)
+</code></pre><p>2.你有用过哪些前端性能优化的方法？</p>
+<pre><code>（1） 减少http请求次数：CSS Sprites, JS、CSS源码压缩、图片大小控制合适；网页Gzip，CDN托管，data缓存 ，图片服务器。
+
+（2） 前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+
+（3） 用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能。
+
+（4） 当需要设置的样式很多时设置className而不是直接操作style。
+
+（5） 少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。
+
+（6） 避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
+
+（7） 图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
+</code></pre><a id="more"></a>
+<pre><code>（8） 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢。
+对普通的网站有一个统一的思路，就是尽量向前端优化、减少数据库操作、减少磁盘IO。向前端优化指的是，在不影响功能和体验的情况下，能在浏览器执行的不要在服务端执行，能在缓存服务器上直接返回的不要到应用服务器，程序能直接取得的结果不要到外部取得，本机内能取得的数据不要到远程取，内存能取到的不要到磁盘取，缓存中有的不要去数据库查询。减少数据库操作指减少更新次数、缓存结果减少查询次数、将数据库执行的操作尽可能的让你的程序完成（例如join查询），减少磁盘IO指尽量不使用文件系统作为缓存、减少读写文件次数等。程序优化永远要优化慢的部分，换语言是无法“优化”的。
+</code></pre><p>3.用js实现千位分隔符?</p>
+<pre><code> function format(num){
+     num=num+&apos;&apos;;
+     var str=&apos;&apos;;
+     for(var i=num.length-1,j=1;i&gt;=0;i--,j++){
+         if(j%3==0&amp;&amp;i!=0){
+             str+=num[i]+&apos;,&apos;;
+             continue;
+         }
+         str+=num[i]
+     }
+     return str.split(&apos;&apos;).reverse().join(&apos;&apos;);
+ }
+alert(format(12345678912))
+</code></pre><p>4.移动端前端开发与PC端比有哪些不同？</p>
+<pre><code>1.pc端没有触摸的各种事件，移动端有；移动端没有鼠标移入移出事件，但是pc端有
+
+2.Pc端最常用的布局是固定宽度为980px（也有960px，1000px，1200px）；而在移动端，因为有很多网页是可以横屏看也可以竖屏看，并且很多屏幕的饿分辨率都是不一样的，所以只要牵涉到移动端都要考虑用响应式布局
+
+3.Pc布局考虑更多的是浏览器的兼容性，但是在移动端，考虑更多的是手机兼容性，因为手机的型号类型非常的多，导致屏幕的分辨率是不一样的
+
+4.移动端触摸弹出的手机键盘处理也是在pc端不会遇到的问题。
+
+5.移动端和pc端适用的js框架也是不一样
+
+6.Pc端浏览器内核有很多，webkit，Gecko，。。。。，但是移动端的浏览器内核比较单一，基本都是webkit以及webkit相关的blink
+
+7.Pc端的交互是鼠标，键盘的交互而移动端变成了触摸，手势的交互
+</code></pre><p>5.我们给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡，会执行几次事件，会先执行冒泡还是捕获？</p>
+<pre><code>绑定在被点击元素的事件是按照代码的顺序发生的，其他非绑定的元素则是通过冒泡或者捕获的触发。按照W3C的标准，先发生捕获事件，后发生冒泡事件。所以事件的整体顺序是：非目标元素捕获 -&gt; 目标元素代码顺序 -&gt; 非目标元素冒泡。
+</code></pre><p>6.移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？</p>
+<pre><code>大概有300ms的延时
+
+来源是因为safari浏览器的双击缩放事件。由于用户可以进行双击缩放或者双击滚动的操作，当用户一次点击屏幕之后，浏览器并不能立刻判断用户是确实要打开这个链接，还是想要进行双击操作。因此，iOS Safari 就等待 300 毫秒，以判断用户是否再次点击了屏幕。其他浏览器都复制了safari的这种约定。
+
+1.用zeptoJs中的tap事件来代替click
+
+2.FastClick
+
+    它的核心思想是取消默认的click时间，判断当前dom节点的类型进行相应的操作
+
+    FastClick 的使用方法非常简单，在 window load 事件之后，在body上调用FastClick.attach()即可。
+
+    window.addEventListener( &quot;load&quot;, function() {
+        FastClick.attach( document.body );
+    }, false );
+</code></pre><p>7.写一个函数，[1,2,3,4,5]=&gt;[1,2,3,4,5,1,2,3,4,5]</p>
+<pre><code>function clone() { 
+    var arr=[1,2,3,4,5];
+    var len=arr.length;
+    for(var i=0;i&lt;len;i++){
+       var b= arr[i];
+       arr.push(b);
+
+    }
+    return arr;
+ }
+alert(clone());
+</code></pre><p>8.JavaScript原型，原型链 ? 有什么特点？</p>
+<pre><code>每个函数（构造函数）都有一个prototype（原型）属性，这个属性是一个指针，指向一个对象（原型对象），而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。
+
+访问一个对象的属性时，先在基本属性中查找，如果没有，继续向上找，找到object原型，这就是原型链
+
+使用原型对象的好处是可以让所有的对象实例共享它所包含的属性和方法。
+
+JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。
+
+ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。
+
+只要是原型链中出现过的原型，都可以说是该原型链所派生的实例的原型。
+
+不能用字面量创建原型的方法，这样做会重写原型链。
+
+不要在原型对象中定义属性的，否则会被所有实例共享。
+</code></pre><p>9.什么是“前端路由”?什么时候适合使用“前端路由”? “前端路由”有哪些优点和缺点?</p>
+<pre><code>1，什么是前端路由？
+
+    路由是根据不同的 url 地址展示不同的内容或页面
+    前端路由就是把不同路由对应不同的内容或页面的任务交给前端来做，之前是通过服务端根据 url 的不同返回不同的页面实现的。
+
+2，什么时候使用前端路由？
+
+    在单页面应用，大部分页面结构不变，只改变部分内容的使用
+
+3，前端路由有什么优点和缺点？
+
+    优点
+    用户体验好，不需要每次都从服务器全部获取，快速展现给用户
+    缺点
+    使用浏览器的前进，后退键的时候会重新发送请求，没有合理地利用缓存
+    单页面无法记住之前滚动的位置，无法在前进，后退的时候记住滚动的位置
+</code></pre><p>10.Javascript如何实现继承？</p>
+<pre><code>1.原型链继承  核心： 将父类的实例作为子类的原型
+
+    function animal(){  
+    this.name=function(){
+        console.log(&apos;我有名字&apos;);
+        }
+    }
+    function cat() { 
+        this.climb=function(){
+            console.log(&apos;我会爬树&apos;)
+        }
+     }
+    function tiger(){
+        this.type=function(){
+             console.log(&apos;我是老虎&apos;)
+        }
+    }
+    cat.prototype=new animal();
+    tiger.prototype=new cat();
+    var  _child=new tiger();
+    console.log(_child.name());
+    console.log(_child.climb())；
+
+2.构造继承
+
+    function Person(name,age){
+       this.name=name;
+       this.age=age;
+    }
+    function Child(name,age,job){
+        Person.call(this,name,age);
+        this.job=job;
+   }
+    var _child=new Child(&apos;lucy&apos;,&apos;16&apos;,&apos;星灵魔法师&apos;);
+    alert(_child.name)
+    alert(_child.age)
+
+3.混合继承
+
+    function Person(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    Person.prototype.sayhellow=function(){
+        alert(&apos;hello,我叫&apos;+this.name+&apos;今年&apos;+this.age)
+    }
+    function Student(name,age,job){
+        Person.apply(this,[name,age]);
+        //Person.apply(this,arguments);
+        // Person.apply(this,name,age)
+        this.job=job;
+    };
+    Student.prototype.sayhellow=function(){
+        alert(&apos;hello,我叫&apos;+this.name+&apos;\n&apos;+&apos;今年&apos;+this.age+&apos;\n&apos;+&apos;我是一名&apos;+this.job)
+    };
+    var student=new Student(&apos;lucy&apos;,&apos;16&apos;,&apos;星灵魔法师&apos;)
+    student.sayhellow();
+</code></pre><p>11.Javascript创建对象的几种方式？</p>
+<pre><code>1.简单对象的创建    使用对象字面的方式{} 
+     var Cat  = {};
+     Cat.name=&quot;kity&quot;;//添加属性并赋值
+     Cat.age=2;
+     Cat.sayHello=function(){
+      alert(&quot;hello &quot;+Cat.name+&quot;,今年&quot;+Cat[&quot;age&quot;]+&quot;岁了&quot;);//可以使用“.”的方式访问属性，也可以使用HashMap的方式访问
+     }
+     Cat.sayHello();//调用对象的（方法）函数
+
+2.用function(函数)来模拟构造函数
+
+    function Person(name,age){  
+        this.name=name;
+        this.age=age;
+        this.job=function(){
+             alert(&quot;我叫&quot;+this.name+&quot;,今年&quot;+this.age+&quot;,我的职业是教师&quot;);
+        }
+    }
+    var person=new Person(&apos;jack&apos;,&apos;26&apos;);
+    person.job()
+
+3.使用工厂方式来创建（Object关键字）
+
+  function Person(name,age){
+        var obj=new Object();
+        obj.name=name;
+        obj.age=age;
+        obj.showName=function(){
+            return this.name
+        };
+        obj.showAge=function(){
+            return this.age
+        };
+        return obj;
+    }
+    var _child=new Person(&apos;张三&apos;,&apos;25&apos;);
+    alert(_child.showName());
+    alert(_child.showAge());
+
+4.使用原型对象的方式  prototype关键字
+
+    function Dog() {};
+    Dog.prototype.name=&quot;旺财&quot;;
+    Dog.prototype.eat=function(){
+        alert(this.name+&quot;是个吃货&quot;)
+    }
+    var dog=new Dog();
+    dog.eat();
+
+5.混合模式(原型和构造函数)
+
+    function Person(name,age) { 
+        this.name=name;
+        this.age=age;
+    }
+    Person.prototype.showJob=function(){
+        alert(&quot;我的名字是&quot;+this.name+&quot;,今年&quot;+this.age+&quot;岁,我的职业是灭龙魔法师 &quot;)
+    }
+    var person=new Person(&quot;natsu&quot;,&quot;16&quot;);
+    person.showJob();
+</code></pre><p>12.写一个快速排序的算法</p>
+<pre><code>function sort(arr){
+   if (arr.length &lt;= 1){return arr};
+    var left=[];
+    var right=[];
+    var midIndex=Math.floor(arr.length / 2);
+    var mid=arr.splice(midIndex,1);
+    var len=arr.length;
+    for(var i=0;i&lt;len;i++){
+        if(arr[i]&gt;mid){
+            right.push(arr[i])
+        }else{
+            left.push(arr[i]);
+        }
+    }
+    return sort(left).concat(mid,sort(right));
+}
+var arr=[55,5,26,12,-20,34,88,49,66,78];
+alert(sort(arr));
+</code></pre><p>13.Javascript作用链域?</p>
+<pre><code>全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。
+当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，
+直至全局函数，这种组织形式就是作用域链。
+</code></pre><p>14.谈谈This对象的理解。</p>
+<pre><code>this总是指向函数的直接调用者（而非间接调用者）；
+如果有new关键字，this指向new出来的那个对象；
+在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；
+</code></pre><p>15.new操作符具体干了什么呢?</p>
+<pre><code>1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
+2、属性和方法被加入到 this 引用的对象中。
+3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。
+</code></pre><p>16.Javascript中，有一个函数，执行时对象查找时，永远不会去查找原型，这个函数是？</p>
+<pre><code>hasOwnProperty
+
+javaScript中hasOwnProperty函数方法是返回一个布尔值，指出一个对象是否具有指定名称的属性。此方法无法检查该对象的原型链中是否具有该属性；该属性必须是对象本身的一个成员。
+使用方法：
+object.hasOwnProperty(proName)
+其中参数object是必选项。一个对象的实例。
+proName是必选项。一个属性名称的字符串值。
+
+如果 object 具有指定名称的属性，那么JavaScript中hasOwnProperty函数方法返回 true，反之则返回 false。
+</code></pre><p>17.AMD（Modules/Asynchronous-Definition）、CMD（Common Module Definition）规范区别？</p>
+<pre><code>AMD 异步模块定义，所有的模块将被异步加载，模块加载不影响后面语句运行。所有依赖某些模块的语句均放置在回调函数中。
+
+CMD 通用模块定义。执行顺序和书写顺序是完全一致，加载完某个依赖模块后并不执行，只是下载而已，在所有依赖模块加载完成后进入主逻辑，遇到require语句的时候才执行对应的模块。
+
+区别：
+
+1. 对于依赖的模块，AMD 是提前执行，CMD 是延迟执行。不过 RequireJS 从 2.0 开始，也改成可以延迟执行（根据写法不同，处理方式不同）。
+2. CMD 推崇依赖就近，只有在用到某个模块的时候再去require。AMD 推崇依赖前置。在定义模块的时候就要声明其依赖的模块。
+</code></pre><p>18.requireJS的核心原理是什么</p>
+<pre><code>1、载入模块
+2、通过模块名解析出模块信息，以及计算出URL
+3、通过创建SCRIPT的形式把模块加载到页面中。
+4、判断被加载的脚本，如果发现它有依赖就去加载依赖模块。如果不依赖其它模块，就直接执行factory方法
+5、等所有脚本都被加载完毕就执行加载完成之后的回调函数
+</code></pre><p>19.GET和POST的区别，何时使用POST？</p>
+<pre><code>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，一般在2000个字符
+POST：一般用于修改服务器上的资源，对所发送的信息没有限制。
+
+GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值，
+也就是说Get是通过地址栏来传值，而Post是通过提交表单来传值。
+
+然而，在以下情况中，请使用 POST 请求：
+无法使用缓存文件（更新服务器上的文件或数据库）
+向服务器发送大量数据（POST 没有数据量限制）
+发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+</code></pre><p>20.AJAX的优缺点</p>
+<pre><code>Ajax的最大的特点是什么。
+
+  Ajax可以实现动态不刷新（局部刷新）
+
+ajax的缺点
+
+  1、ajax不支持浏览器back按钮。
+
+  2、安全问题 AJAX暴露了与服务器交互的细节。
+
+  3、对搜索引擎的支持比较弱。
+
+  4、破坏了程序的异常机制。
+
+  5、不容易调试。
+</code></pre><p>21.网站重构的理解？</p>
+<pre><code>网站重构：在不改变外部行为的前提下，简化结构、添加可读性，而在网站前端保持一致的行为。也就是说是在不改变UI的情况下，对网站进行优化，在扩展的同时保持一致的UI。
+
+对于传统的网站来说重构通常是：
+
+表格(table)布局改为DIV+CSS
+使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的)
+对于移动平台的优化
+针对于SEO进行优化
+深层次的网站重构应该考虑的方面
+
+减少代码间的耦合
+让代码保持弹性
+严格按规范编写代码
+设计可扩展的API
+代替旧有的框架、语言(如VB)
+增强用户体验
+通常来说对于速度的优化也包含在重构中
+
+压缩JS、CSS、image等前端资源(通常是由服务器来解决)
+程序的性能优化(如数据读写)
+采用CDN来加速资源加载
+对于JS DOM的优化
+HTTP服务器的文件缓存
+</code></pre><p>22.Web Worker 和webSocket</p>
+<pre><code>worker主线程:
+
+1.通过 worker = new Worker( url ) 加载一个JS文件来创建一个worker，同时返回一个worker实例。
+
+2.通过worker.postMessage( data ) 方法来向worker发送数据。
+
+3.绑定worker.onmessage方法来接收worker发送过来的数据。
+
+4.可以使用 worker.terminate() 来终止一个worker的执行。
+
+WebSocket是Web应用程序的传输协议，它提供了双向的，按序到达的数据流。他是一个HTML5协议，WebSocket的连接是持久的，他通过在客户端和服务器之间保持双工连接，服务器的更新可以被及时推送给客户端，而不需要客户端以一定时间间隔去轮询
+</code></pre><p>23.HTTP和HTTPS,为什么HTTPS安全</p>
+<pre><code>HTTP协议通常承载于TCP协议之上，在HTTP和TCP之间添加一个安全协议层（SSL或TSL），这个时候，就成了我们常说的HTTPS。
+
+默认HTTP的端口号为80，HTTPS的端口号为443。
+
+因为网络请求需要中间有很多的服务器路由器的转发。中间的节点都可能篡改信息，而如果使用HTTPS，密钥在你和终点站才有。https之所以比http安全，是因为他利用ssl/tls协议传输。它包含证书，卸载，流量转发，负载均衡，页面适配，浏览器适配，refer传递等。保障了传输过程的安全性
+</code></pre><p>​</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+     
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+     
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/11/前端面试题/" rel="next" title="前端面试题（一）">
+                <i class="fa fa-chevron-left"></i> 前端面试题（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/22/数组排序算法/" rel="prev" title="数组排序算法">
+                数组排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="keivin" />
+            
+              <p class="site-author-name" itemprop="name">keivin</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liunianyimeng/liunianyimeng.github.io" target="_blank" title="GitHub"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">keivin</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.6</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.6"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.6"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.6"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.6"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.6"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.6"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>
