@@ -336,6 +336,283 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/仿饿了么踩到的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="keivin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="keivin的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/20/仿饿了么踩到的坑/" itemprop="url">仿饿了么踩到的坑</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T20:00:13+08:00">2018-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+ 
+      
+        
+          
+            <p>最近在做2.0版本的饿了么,在慕课网上的教程是1.0版本的,在写到评价系统，遇到父子组件通讯的时候，遇到的困难，记录一下，巩固知识。</p>
+<p>本意是想实现下面图片的功能，点击每个选项，动态的切换项目下面的list.<br><img src="https://raw.githubusercontent.com/liunianyimeng/exercise/master/src/1.png" alt="image"></p>
+<p>直接上代码：</p>
+<pre><code>错误代码
+&lt;template&gt;
+....省略样式...
+&lt;/template&gt;
+&lt;script&gt;
+const POSITIVE = 0;
+const NEGATIVE = 1;
+const ALL = 2;
+export default {
+  props: {
+    ratings: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+    selectType: {
+      type: Number,
+      default: ALL
+    },
+    onlyContent: {
+      type: Boolean,
+      default: false
+    },
+    desc: {
+      type: Object,
+      default() {
+        return {
+          all: &apos;全部&apos;,
+          positive: &apos;满意&apos;,
+          negative: &apos;不满意&apos;
+        };
+      }
+    }
+  },
+&lt;!--more--&gt;
+  computed: {
+    positives() {
+      return this.ratings.filter((rating) =&gt; {
+        return rating.rateType === POSITIVE;
+      });
+    },
+    negatives() {
+      return this.ratings.filter((rating) =&gt; {
+        return rating.rateType === NEGATIVE;
+      });
+    }
+  },
+  methods: {
+    select(type, event) {
+      if (!event._constructed) {
+        return;
+      }
+      this.typeSelect = type;
+      this.$emit(&apos;select&apos;, type);
+    },
+    toggleContent(event) {
+      if (!event._constructed) {
+        return;
+      }
+      this.selectContent = !this.onlyContent;
+      this.$emit(&apos;toggle&apos;, this.selectContent);
+    }
+  }
+};
+&lt;/script&gt;
+</code></pre><p> 父组件：</p>
+<pre><code>&lt;ratingselect :onlyContent=&quot;onlyContent&quot; :selectType=&quot;selectType&quot; :ratings=&quot;ratings&quot; @select=&quot;selectRating&quot; @toggle=&quot;toggleContent&quot;&gt;&lt;/ratingselect&gt;
+
+export default{
+  props: {
+    seller: {
+      type: Object
+    }
+  },
+  data() {
+    return {
+      showFlag: false,
+      ratings: [],
+      selectType: ALL,
+      onlyContent: true
+    };
+  },
+  filters: {
+    formatDate(time) {
+      let date = new Date(time);
+      return formatDate(date, &apos;yyyy-MM-dd hh:mm&apos;);
+    }
+  },
+  created() {
+    this.$http.get(&apos;/api/ratings&apos;).then((res) =&gt; {
+      res = res.data;
+      // console.log(res);
+      if (res.errno === ERR_OK) {
+        this.ratings = res.data;
+        this.$nextTick(() =&gt; {
+          console.log(this.$refs);
+          console.log(this.$el);
+          this.scroll = new BScroll(this.$el, {
+            click: true
+          });
+        });
+      }
+    });
+  },
+  methods: {
+    needShow(type, text) {
+      if (this.onlyContent &amp;&amp; !text) {
+        return false;
+      }
+      if (this.selectType === ALL) {
+        return true;
+      } else {
+        return type === this.selectType;
+      }
+    },
+    selectRating(type) {
+      this.selectType = type;
+      this.$nextTick(() =&gt; {
+        this.scroll.refresh();
+      });
+    },
+    toggleContent() {
+      this.onlyContent = !this.onlyContent;
+      this.$nextTick(() =&gt; {
+        this.scroll.refresh();
+      });
+    }
+  },
+  components: {
+    star,
+    split,
+    ratingselect
+  }
+};
+</code></pre><p>按照视频和自己理解的2.0知识，子组件通过$emit（’自定义事件名’,’参数’）触发一个事件，并且把参数传递过去。子组件定义的函数在父组件中找到和它同名的函数（一般用@子函数名=父组件定义的函数名），并且把参数传递过去。父组件通过监听，知道子组件需要改变，于是，接收传递过来的参数，并且执行。在预览的时候没有问题，当点击到组件的时候，报错。 </p>
+<pre><code>[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop&apos;s value. Prop being mutated: 
+&quot;xxx&quot; (found in component ) 
+</code></pre><p>按照文档给的解释是 子组件只能被动接收父组件传递过来的数据，并在子组件内不能修改由父组件传递过来的props数据。每次父组件更新时，子组件的所有prop都会更新为最新值，因此不应该在子组件内部改变 prop，如果我们尝试直接修改prop 属性的值，就会有警告提示。</p>
+<p>网上找了好多资料解决这个问题，都没有成功，无意间看到一篇博客，上面说，在子组件data中定义一个父组件传递过来的副本,再把该副本利用this.$emit(“”,””)给传回去，父组件利用自定义事件接受该值，意思是在子组件中声明一个中间变量，避免直接改变父组件传递过来的值。于是抱着试一下的心态，按照他说的，改了一下代码，果然不会再报错。</p>
+<p>代码几乎没变，只是在子组件中多加了一个data函数，定义了一下，需要传递的数据</p>
+<pre><code>data() {
+    return {
+      typeSelect: this.selectType,
+      selectContent: this.onlyContent
+    }
+  },
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+     
+    <div>
+      
+    </div>
+     
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/22/数组排序算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -939,158 +1216,6 @@ Secure:安全。指定cookie的值通过网络如何在用户和web服务器间�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/06/旋转木马/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="keivin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="keivin的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/06/旋转木马/" itemprop="url">类似旋转木马效果</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-06T14:17:03+08:00">2017-01-06</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
- 
-      
-        
-          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>用纯原生javascript写的类似旋转木马的图片3D效果。实现图片由远及近，由大变小。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>1.布局</p>
-<p>首先，定义一个容器，设定宽，高，超出部分隐藏。准备7张图片，放在容器中。因为要让图片看起来有3D效果，所以，图片的大小应该不一样，看起来远的图片，图片要小一些，模糊度也低一些。中间图片的层次设为最高，两边对称的减小。如图：<br><img src="https://raw.githubusercontent.com/liunianyimeng/exercise/master/src/review.png" alt="image"></p>
-<p>css代码如下</p>
-<pre><code>*{
-        margin: 0;
-        padding:0;
-        list-style: none;
-    }
-    .cantainer{
-        width:1000px;
-        height: 400px;
-        margin:50px auto;
-        overflow: hidden;
-        position: relative;
-    }
-    ul{
-        height: 400px;
-        position: absolute;
-    }
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/06/旋转木马/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-     
-    <div>
-      
-    </div>
-     
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1142,7 +1267,7 @@ Secure:安全。指定cookie的值通过网络如何在用户和web服务器间�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1304,7 +1429,7 @@ Secure:安全。指定cookie的值通过网络如何在用户和web服务器间�
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共19.2k字</span>
+  <span class="post-count">博客全站共20.0k字</span>
 </div>
         
 <div class="busuanzi-count">
